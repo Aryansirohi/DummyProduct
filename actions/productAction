@@ -1,0 +1,14 @@
+import axios from 'axios';
+
+export const fetchProducts = (pageNumber, pageSize) => {
+  return (dispatch) => {
+    axios
+      .get(`https://dummyjson.com/products?skip=${pageNumber * pageSize}&limit=${pageSize}`)
+      .then((response) => {
+        dispatch({ type: 'FETCH_PRODUCTS_SUCCESS', products: response.data });
+      })
+      .catch((error) => {
+        dispatch({ type: 'FETCH_PRODUCTS_ERROR', error });
+      });
+  };
+};
